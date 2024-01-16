@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchWeather } from './actions/weatherActions';
+import Weather from './components/Weather';
 
-function App() {
+// App top level component wraps over all the rest of the components
+const App = () => {
+  const dispatch = useDispatch();
+
+  const cities = ['London', 'New York', 'Tokyo'];
+
+  /* iterate over cities array and create button for each with
+  a unique key identifier for efficient re-rendering
+  when a button is clicked, the fetchWeather action is dispatched
+  with the city as the argument, and the action will trigger an API call to fetch the weather data
+  for the specified city */
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> Weather App </h1>
+      {cities.map(city => (
+        <button key={city} onClick={() => dispatch(fetchWeather(city))}>
+          {city}
+        </button>
+      ))}
+      {cities.map(city=> (
+        <Weather key={city} city={city} />
+      ))}
     </div>
-  );
+
+  )
 }
 
 export default App;
