@@ -7,6 +7,8 @@ import Weather from './components/Weather';
 const App = () => {
   const dispatch = useDispatch();
 
+
+
   const cities = ['London', 'New York', 'Tokyo'];
 
   /* iterate over cities array and create button for each with
@@ -22,9 +24,8 @@ const App = () => {
           {city}
         </button>
       ))}
-      {cities.map(city=> (
-        <Weather key={city} city={city} />
-      ))}
+
+        <Weather  />
     </div>
 
   )

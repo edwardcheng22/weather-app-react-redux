@@ -1,15 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const Weather = ({ city }) => {
-    const weatherData = useSelector(state => state.weather.weatherData[city])
-    if (!weatherData) {
-      return null; // or render a loading spinner or message
+const Weather = ({  }) => {
+    const currentWeather = useSelector(state => state.weather.currentWeather);
+    if (!currentWeather) {
+      return <p>Click a city to view its weather</p>; // or render a loading spinner or message
   }
+
+
     return (
       <div>
-      <h2>{weatherData.name}</h2>
-      <p>Temperature: {weatherData.main.temp} °C</p>
+      <h2>{currentWeather.city}</h2>
+      <p>Minimum Temperature: {currentWeather.data.min_temp} °C</p>
+      <p>Maximum Temperature: {currentWeather.data.max_temp} °C</p>
+      <p>Weather Description: {currentWeather.data.weatherDescription}</p>
   </div>
       );
 }
